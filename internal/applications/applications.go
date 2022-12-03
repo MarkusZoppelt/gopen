@@ -52,6 +52,12 @@ func GetInstalledApplications() []string {
 	}
 	applications = append(applications, apps...)
 
+	apps, err = filepath.Glob("/opt/homebrew/bin/*")
+	if err != nil {
+		log.Fatal(err)
+	}
+	applications = append(applications, apps...)
+
 	return applications
 }
 
