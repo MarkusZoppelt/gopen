@@ -8,3 +8,5 @@ application to open the file with.
 It is the equivalent of opening the file with `open -a <Appname> <file>` but
 instead of specifying the application beforehand, the fuzzy finder can be used
 to select the app when running.
+
+![Demo gif](img/demo.gif)
