@@ -57,7 +57,7 @@ func GetInstalledApplications() []string {
 
 // openApplication opens the application with the given filepth
 // TODO; support Windows
-func OpenWithApplication(application string, filepaths []string, verbose bool) error {
+func OpenWithApplication(application string, filepaths []string, verbose bool) ([]byte, error) {
 	var cmd *exec.Cmd
 	switch runtime.GOOS {
 	case "darwin":
@@ -78,5 +78,5 @@ func OpenWithApplication(application string, filepaths []string, verbose bool) e
 		log.Printf("executing command: %s", cmd.String())
 	}
 
-	return cmd.Run()
+	return cmd.Output()
 }

@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"fmt"
 	"log"
 	"os"
 
@@ -12,7 +13,6 @@ import (
 
 var verbose bool
 
-// rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "gopen [file]",
 	Short: "Open a file with a specific application",
@@ -34,10 +34,11 @@ After running the command, a fuzzy search will be started to select the applicat
 		}
 
 		// open the selected application
-		err = apps.OpenWithApplication(applications[idx], args, verbose)
+		output, err := apps.OpenWithApplication(applications[idx], args, verbose)
 		if err != nil {
 			log.Fatal(err)
 		}
+		fmt.Println(string(output))
 	},
 }
 
@@ -45,10 +46,7 @@ func init() {
 	rootCmd.Flags().BoolVarP(&verbose, "verbose", "v", false, "verbose output")
 }
 
-// Execute adds all child commands to the root command and sets flags appropriately.
-// This is called by main.main(). It only needs to happen once to the rootCmd.
 func Execute() {
-	// read all installed applications
 	err := rootCmd.Execute()
 	if err != nil {
 		os.Exit(1)
